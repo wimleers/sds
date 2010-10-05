@@ -32,6 +32,8 @@ function sds_drush_command() {
       '--structure-tables-key' => 'A key in the $structure_tables array. @see example.drushrc.php. Optional.',
       '--tables' => 'An explcit list of tables to dump, in comma delimited format',
       '--ordered-dump' => 'Use this option to output ordered INSERT statements in the sql-dump. Useful when backups are managed in a Version Control System. Optional.',
+      '--path' => 'Define the path where the dump will be saved to.',
+      '--bzip2' => 'When this option is set, the dump will be bzipped.',
     ) + $options,
   );
 
@@ -181,6 +183,11 @@ function drush_sds_build_dump_command($db_spec = NULL) {
         }
       }
       break;
+  }
+
+  if (drush_get_option('bzip2')) {
+    // Overwrite existing dump and use less memory (at most 2500K).
+    $exec .= "; bzip2 --compress --force --small $file";
   }
 
   return $exec;
