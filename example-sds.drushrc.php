@@ -1,13 +1,13 @@
 <?php
 
-// Custom settings for dgb drush command. Rename it to drushrc.php and place it
-// in the Drupal installation directory DRUPAL_ROOT. Alternatively you can place
-// it one level up and make a symbolic link from DRUPAL_ROOT, it will be backed
-// as part of whole site. If you already have drushrc.php file, you can just add
-// the settings below to it.
+// Custom settings for sql-dump-smart drush command. Rename it to drushrc.php
+// and place it in the Drupal installation directory DRUPAL_ROOT.
+// Alternatively you can place it one level up and make a symbolic link from
+// DRUPAL_ROOT, it will be backed as part of whole site. If you already have
+// drushrc.php file, you can just add the settings below to it.
 
 /*
- * Command-specific options for dgb.
+ * Command-specific options for sql-dump-smart.
  *
  * To define options that are only applicable to certain commands,
  * make an entry in the 'command-specific' structures as shown below.
@@ -21,7 +21,7 @@
  * Limitation: If 'verbose' is set in a command-specific option,
  * it must be cleared by '--no-verbose', not '--no-v', and visa-versa.
  */
-$dgb_options = array(
+$sds_options = array(
   'verbose' => FALSE,
   // Necessary to have a better versionability of the sql dumps.
   'ordered-dump' => TRUE,
@@ -36,14 +36,9 @@ $dgb_options = array(
   // repository and outside the public web space of your server.
   // Default is to assume the database dumps directory is one level up the
   // drupal installation directory.
-  'dgb-dumps' => '../databases',
-  // Location of the git repository. Typically one level up DRUPAL_ROOT.
-  'dgb-repository' => '..',
+  'path' => '../databases',
 );
-$command_specific['dgb-dump'] = $dgb_options;
-$command_specific['dgb-commit'] = $dgb_options;
-$command_specific['dgb-usage'] = $dgb_options;
-$command_specific['dgb-backup'] = $dgb_options;
+$command_specific['sql-dump-smart'] = $sds_options;
 
 /*
  * Customize this associative array with your own tables. This is the list of
